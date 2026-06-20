@@ -5,9 +5,25 @@
 </head>
 <body>
 
-<h1>Trainer Dashboard</h1>
+<h1>Welcome {{ trainer.full_name }}</h1>
 
-<h2>Welcome Trainer</h2>
+<p>Email: {{ trainer.email }}</p>
+
+<p>Experience: {{ trainer.experience }}</p>
+
+<p>Specialization: {{ trainer.specialization }}</p>
+
+<h2>Assigned Courses</h2>
+
+<ul>
+
+{% for course in courses %}
+
+<li>{{ course.course_name }}</li>
+
+{% endfor %}
+
+</ul>
 
 </body>
 </html>

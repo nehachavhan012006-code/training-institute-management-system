@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from trainers.models import Trainer
+from courses.models import Course
 
 def login_view(request):
 
@@ -33,7 +35,25 @@ def login_view(request):
     return render(request, 'users/login.html')
 
 def trainer_dashboard(request):
-    return render(request, 'users/trainer_dashboard.html')
+
+    trainer = Trainer.objects.get(
+        user=request.user
+    )
+
+    courses = Course.objects.filter(
+        trainer=trainer
+    )
+
+    context = {
+        'trainer': trainer,
+        'courses': courses
+    }
+
+    return render(
+        request,
+        'users/trainer_dashboard.html',
+        context
+    )
 
 
 def student_dashboard(request):
